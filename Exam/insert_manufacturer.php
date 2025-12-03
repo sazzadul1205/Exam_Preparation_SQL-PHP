@@ -19,6 +19,13 @@ if ($db->connect_error) {
 ?>
 
 <body>
+    <!-- navbar.php -->
+    <nav style="background-color: #333; padding: 10px;">
+        <a href="ProductTable.php" style="color: white; margin-right: 15px; text-decoration: none;">Products</a>
+        <a href="Manufacture_Product.php" style="color: white; margin-right: 15px; text-decoration: none;">Manufacturers</a>
+        <a href="insert_manufacturer.php" style="color: white; margin-right: 15px; text-decoration: none;">Add Manufacturer</a>
+        <a href="expecsive_products_view.php" style="color: white; margin-right: 15px; text-decoration: none;">Expensive Products</a>
+    </nav>
 
     <form action="" method="post">
         <h3>Insert Manufacturer</h3>
