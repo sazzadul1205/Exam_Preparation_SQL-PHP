@@ -24,6 +24,14 @@ $result = $db->query($sql);
 
 <body>
     <h3>All Students</h3>
+
+    <?php
+    session_start();
+    if (isset($_SESSION['success'])) {
+        echo "<p style='color: green;'>" . htmlspecialchars($_SESSION['success']) . "</p>";
+        unset($_SESSION['success']);
+    }
+    ?>
     <table>
         <tr>
             <th>Student ID</th>
@@ -32,23 +40,27 @@ $result = $db->query($sql);
             <th>Mobile</th>
             <th>Course</th>
             <th>Result</th>
+            <th>Action</th>
         </tr>
-        <?php
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . $row['student_id'] . "</td>";
-                echo "<td>" . $row['student_name'] . "</td>";
-                echo "<td>" . $row['address'] . "</td>";
-                echo "<td>" . $row['mobile'] . "</td>";
-                echo "<td>" . $row['student_name'] . "</td>";
-                echo "<td>" . $row['totalmarks'] . "</td>";
-                echo "</tr>";
-            }
-        } else {
-            echo "<tr><td colspan='6'>No records found.</td></tr>";
-        }
-        ?>
+        <?php if ($result->num_rows > 0): ?>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td><?= htmlspecialchars($row['student_id']) ?></td>
+                    <td><?= htmlspecialchars($row['student_name']) ?></td>
+                    <td><?= htmlspecialchars($row['address']) ?></td>
+                    <td><?= htmlspecialchars($row['mobile']) ?></td>
+                    <td><?= htmlspecialchars($row['module_name']) ?></td>
+                    <td><?= htmlspecialchars($row['totalmarks']) ?></td>
+                    <td>
+                        <a href="edit_student.php?id=<?= urlencode($row['student_id']) ?>">Edit</a>
+                </tr>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <tr>
+                <td colspan="6">No records found.</td>
+            </tr>
+        <?php endif; ?>
+
     </table>
 </body>
 
