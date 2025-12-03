@@ -1,0 +1,5 @@
+//Procedure
+CREATE PROCEDURE `add_student`(IN `Pname` INT, IN `Paddress` INT, IN `Pmobile` INT) NOT DETERMINISTIC CONTAINS SQL SQL SECURITY DEFINER INSERT INTO students (name, address, mobile) VALUES (Pname, Paddress, Pmobile);
+
+//Trigger
+DROP TRIGGER IF EXISTS `after_student_delete`;CREATE DEFINER=`root`@`localhost` TRIGGER `after_student_delete` AFTER DELETE ON `students` FOR EACH ROW DELETE FROM results WHERE student_id = OLD.id
